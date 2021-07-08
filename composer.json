@@ -1,0 +1,24 @@
+{
+  "name": "flashbox/flashbox-api-php",
+  "type": "package",
+  "description": "FlashBox Api PHP Handler",
+  "keywords": [
+    "FlashBox", "Business", "Api", "FlashBox Api", "FlashBox Business Api", "FlashBox PHP", "PHP"
+  ],
+  "authors": [
+    {
+      "name": "FlashBox LTD",
+      "email": "sales@flashbox.co"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "FlashBox\\": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
