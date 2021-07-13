@@ -19,14 +19,16 @@ class Order
     private $cashed;
     private $scheduled_at;
     private $discount_coupon;
+    private $city;
 
-    public function __construct($transportType, $paymentType, $originAddress, $destinationsAddress, $scheduled_at = null, $discount_coupon=null)
+    public function __construct($transportType, $paymentType, $originAddress, $destinationsAddress, $city = "", $scheduled_at = null, $discount_coupon=null)
     {
         $this->setTransportType($transportType);
         $this->setPaymentType($paymentType);
         $this->addOriginAddress($originAddress);
         $this->setHasReturn(false);
         $this->setCashed(false);
+        $this->setCity($city);
 
         if($scheduled_at)
         {
@@ -141,6 +143,15 @@ class Order
         $this->cashed = $cashed;
     }
 
+    /**
+     * @param $city
+     */
+    public function setCity($city)
+    {
+        $city = FlashBoxValidator::sanitize($city);
+        $this->city = $city;
+    }
+
     // Getters ---------------------------------------------------------------------------------------------------------
 
     /**
@@ -201,6 +212,14 @@ class Order
     public function getCashed()
     {
         return $this->cashed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 
     // Actions ---------------------------------------------------------------------------------------------------------
@@ -274,7 +293,8 @@ class Order
             'has_return' => $this->getHasReturn(),
             'cashed' => $this->getCashed(),
             'scheduled_at' => $this->getScheduledAt(),
-            'discount_coupon' => $this->getDiscountCoupon()
+            'discount_coupon' => $this->getDiscountCoupon(),
+            'city' => $this->getCity()
         ];
 
         $orderArray['addresses'] = array_merge(
